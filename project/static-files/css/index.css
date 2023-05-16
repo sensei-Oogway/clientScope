@@ -1,0 +1,108 @@
+body {
+    background-color: #F8F8F8;
+  }
+  
+  .app-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #007BFF;
+  }
+  
+  .main-container {
+    height: 100vh;
+  }
+  
+  #login-button {
+    margin-bottom: 1rem;
+  }
+  
+  #signup-button {
+    border-color: #007BFF;
+    color: #007BFF;
+  }
+  
+
+  /* Login form */
+
+
+  
+  .container-fluid {
+    height: 100vh;
+  }
+  
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #bbb;
+    margin-bottom: 20px;
+  }
+  
+  .login-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .login-form label {
+    font-weight: 600;
+  }
+  
+  .login-form button[type="submit"] {
+    margin-top: 20px;
+  }
+  
+  .login_form .back-link {
+    margin-top: 20px;
+    color: #3f3f3f;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .login_form .back-link i {
+    margin-right: 10px;
+  }
+
+  .registration_form .back-link {
+    color: #3f3f3f;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .serviceIds {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  }
+
+
+  /* Overlay */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#overlay-message {
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+#overlay-message h2 {
+  margin-top: 0;
+}
+
+  
