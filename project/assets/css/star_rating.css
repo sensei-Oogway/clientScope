@@ -1,0 +1,42 @@
+  /* Add the 'rating-empty' class to all rating divs by default */
+  .rating {
+    display: inline-block;
+    width: 40%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0;
+    line-height: 1;
+  }
+  .rating::before {
+    content: "\2606 \2606 \2606 \2606 \2606";
+    color: #ccc;
+    font-size: 16px;
+  }
+  
+  /* Add the 'rating-stars' class to rating divs based on their value */
+  .rating-0::before{
+    content: "\2606 \2606 \2606 \2606 \2606"; 
+    color: #ccc; 
+  }
+  .rating-1::before {
+    content: "\2605 \2606 \2606 \2606 \2606";
+    color: #ffa200;
+  }
+  .rating-2::before {
+    content: "\2605 \2605 \2606 \2606 \2606";
+    color: #ffa200;
+  }
+  .rating-3::before {
+    content: "\2605 \2605 \2605 \2606 \2606";
+    color: #ffa200;
+  }
+  .rating-4::before {
+    content: "\2605 \2605 \2605 \2605 \2606";
+    color: #ffa200;
+  }
+  .rating-5::before {
+    content: "\2605 \2605 \2605 \2605 \2605";
+    color: #ffa200;
+  }
+  
