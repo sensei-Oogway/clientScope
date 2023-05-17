@@ -61,24 +61,24 @@
 
           <div class="form-group row">
             <div class="col-6">
-              <input type="text" class="form-control" placeholder="First Name">
+              <input type="text" class="form-control" name="first_name" placeholder="First Name">
             </div>
             <div class="col-6">
-              <input type="text" class="form-control" placeholder="Last Name">
+              <input type="text" class="form-control" name="last_name" placeholder="Last Name">
             </div>
           </div>
 
           <div class="form-group">
-            <input type="email" class="form-control" placeholder="Email ID">
+            <input type="email" class="form-control" name="emailId" placeholder="Email ID">
           </div>
           <div class="form-group">
-            <input type="tel" class="form-control" placeholder="Phone">
+            <input type="tel" class="form-control" name="phone" placeholder="Phone">
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" class="form-control" name="password" placeholder="Password">
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" placeholder="Confirm Password">
+            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password">
           </div>
 
           <div class="form-group" style="margin-left:10px;">
@@ -97,27 +97,27 @@
             <label>Select Services:</label>
             <div class="serviceIds" style="overflow: auto; max-height:80px;">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="1" id="treeRemovalCheckbox">
+                <input class="form-check-input" type="checkbox" name="services" value="1" id="treeRemovalCheckbox">
                 <label class="form-check-label" for="treeRemovalCheckbox">Tree removal</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="2" id="roofCleaningCheckbox">
+                <input class="form-check-input" type="checkbox" name="services" value="2" id="roofCleaningCheckbox">
                 <label class="form-check-label" for="roofCleaningCheckbox">Roof cleaning</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="3" id="fenceInstallationCheckbox">
+                <input class="form-check-input" type="checkbox" name="services" value="3" id="fenceInstallationCheckbox">
                 <label class="form-check-label" for="fenceInstallationCheckbox">Fence installation</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="4" id="ovenRepairsCheckbox">
+                <input class="form-check-input" type="checkbox" name="services" value="4" id="ovenRepairsCheckbox">
                 <label class="form-check-label" for="ovenRepairsCheckbox">Oven repairs</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="5" id="acRepairsCheckbox">
+                <input class="form-check-input" type="checkbox" name="services" value="5" id="acRepairsCheckbox">
                 <label class="form-check-label" for="acRepairsCheckbox">AC repairs</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="6" id="tileCleaningCheckbox">
+                <input class="form-check-input" type="checkbox" name="services" value="6" id="tileCleaningCheckbox">
                 <label class="form-check-label" for="tileCleaningCheckbox">Tile cleaning</label>
               </div>
             </div>
@@ -165,15 +165,15 @@
 
 
           <div class="form-group">
-            <input type="number" class="form-control" placeholder="Card number">
+            <input type="number" class="form-control" name="card_number" placeholder="Card number">
           </div>
 
           <div class="form-group row">
             <div class="col-3 col-md-3">
-              <input type="password" maxlength="3" class="form-control" placeholder="CVV">
+              <input type="password" maxlength="3" class="form-control" name="cvv" placeholder="CVV">
             </div>
             <div class="col-9 ">
-              <input type="text" class="form-control" id="datepicker" placeholder="Expiry date" required>
+              <input type="text" class="form-control" id="datepicker" name="exp_date" placeholder="Expiry date" required>
             </div>
           </div>
 
@@ -200,7 +200,7 @@
             <p>End Date: <span id="end_date">01/01/2023</span></p>
             <p>Price: $99.99</p>
           </div>
-          <button class="btn btn-primary btn-lg btn-block" id="login-button">Complete Registration</button>
+          <button class="btn btn-primary btn-lg btn-block" id="register_user">Complete Registration</button>
         </div>
       </div>
 
