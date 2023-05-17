@@ -8,5 +8,30 @@ class Professional(models.Model):
     account = models.TextField()
     services = models.TextField()
 
+    @classmethod
+    def create(cls, email, name, password, phone, account, services):
+        professional = cls(email=email, name=name, password=password, phone=phone, account=account, services=services)
+        professional.save()
+        return professional
+
+    @classmethod
+    def authenticate(cls, email, password):
+        try:
+            professional = cls.objects.get(email=email, password=password)
+            return professional
+        except cls.DoesNotExist:
+            return None
+
     def __str__(self):
         return self.email
+    
+    def to_json(self):
+        professional_data = {
+            "email": self.email,
+            "name": self.name,
+            "password": self.password,
+            "phone": self.phone,
+            "account": self.account,
+            "services": self.services,
+        }
+        return json.dumps(professional_data)
