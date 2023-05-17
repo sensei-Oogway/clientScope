@@ -26,12 +26,20 @@ class Client(models.Model):
     
     @classmethod
     def get_open_requests_with_accepted_offers(client):
-        result = {
-                "open_requests": {},
-                "accepted_offers": {},
-                "professionals": {}
-            }
+        result = {}
 
+        open_requests = Request.get_open_requests_by_client(client)
+        if open_requests :
+            result['requests'] = []
+            for request in open_requests:
+                request_obj = request.to_json()
+                offers = request.get_offers_accepted()
+                if offers:
+                    request_obj['offers'] = []
+                    for offer in offers:
+                        request_obj.offers.append(offer.professional.to_json())
+                result.requests.append(request_obj)
+            
         return result
     
     def __str__(self):
@@ -83,13 +91,29 @@ class Request(models.Model):
         self.comment = comment
         self.save()
 
+    def get_offers_accepted(self):
+        offers = Offer.objects.filter(request=self,status='accepted')
+        return offers
+
     @classmethod
     def get_closed_requests_by_client(cls, client):
         return cls.objects.filter(client=client, status='closed')
+    
+    @classmethod
+    def get_ongoing_requests_by_client(cls, client):
+        return cls.objects.filter(client=client, status='ongoing')
+    
+    @classmethod
+    def get_open_requests_by_client(cls, client):
+        return cls.objects.filter(client=client, status='open')
 
     @classmethod
     def get_closed_requests_by_professional(cls, professional):
         return cls.objects.filter(professional=professional, status='closed')
+    
+    @classmethod
+    def get_ongoing_requests_by_professional(cls, professional):
+        return cls.objects.filter(professional=professional, status='ongoing')
 
     def __str__(self):
         return f"Request #{self.id}"
@@ -143,12 +167,30 @@ class Offer(models.Model):
 
         return {"open": open_requests, "accepted": accepted_requests}
     
+    @classmethod
+    def delete_offers_by_request(cls, req):
+        offers = cls.objects.filter(request = req)
+
+        for offer in offers:
+            offer.reject_offer()
+
+    
     def bid(self):
         self.status = 'accepted'
         self.save()
 
     def reject_offer(self):
         self.delete()
+
+    @classmethod
+    def accept_offer(cls, offer):
+        professional = offer.professional
+        request = offer.request
+
+        request.professional = professional
+        request.status = "ongoing"
+
+        Offer.delete_offers_by_request(request)
     
 
     
@@ -163,6 +205,3 @@ class Offer(models.Model):
             "status": self.status,
         }
         return json.dumps(offer_data)
-
-
-
