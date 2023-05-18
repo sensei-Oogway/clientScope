@@ -1,0 +1,15 @@
+<h2> History data </h2>
+{% for req in requests%}
+<div class="card" style="margin-top:10px">
+    <div class="card-body">
+        <div class="card-container">
+            <div class="card-item" data-toggle="tooltip" title="Tooltip text 1">{{req.name}}</div>
+            <div class="card-item" data-toggle="tooltip" title="Tooltip text 1">{{req.email}}</div>
+            <div class="card-item" data-toggle="tooltip" title="Tooltip text 1">{{req.type}}</div>
+            <div class="card-item" data-toggle="tooltip" title="Tooltip text 1">${{req.amount}}</div>
+            <div class="card-item" data-toggle="tooltip" title="Tooltip text 1">{{req.rating}}/5</div>
+            <div class="card-item" data-toggle="tooltip" title="Tooltip text 1">{{req.comment}}</div>
+        </div>
+    </div>
+</div>
+{%endfor%}

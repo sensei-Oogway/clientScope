@@ -23,6 +23,7 @@ window.addEventListener('load', function () {
 
     $("#client_toolbar_history").click(function (event) {
         toggleSelected($("#client_toolbar_history"))
+        load_history()
     });
 
     var overlay1 = document.getElementById("job-details");
@@ -172,4 +173,18 @@ var addEventListeners_ongoing = function(){
         // $('.job-details-reject').prop('disabled', false);
         $('#ongoing-details').show()
     });
+}
+
+var load_history = function(){
+    sendAjaxRequest("history", "GET", {}, (response) => {
+        if (response == "empty") {
+            $("#nothing_here").show()
+        } else {
+            if ($("#nothing_here").is(':visible')) {
+                $("#nothing_here").hide()
+            }
+            $("#professional_requests_container").html(response)
+            $("#professional_requests_container").show()
+        }
+    })
 }

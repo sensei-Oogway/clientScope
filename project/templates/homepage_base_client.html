@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+
+
 
 </head>
 
@@ -98,7 +101,7 @@
                             <input type="hidden" value="1" name="formId">
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name ="move" id="tree-moving">
+                            <input type="checkbox" class="form-check-input" name="move" id="tree-moving">
                             <label class="form-check-label" for="tree-moving">Tree moving services also required</label>
                         </div>
                         <div class="form-group">
@@ -300,7 +303,23 @@
 
         </div>
 
-        <div id = "client_ongoing_container" class="container-fluid" style="display: none;margin-top: 10px;">
+        <div id="client_ongoing_container" class="container-fluid" style="display: none;margin-top: 10px;">
+        </div>
+
+        <!-- Review overlay div -->
+        <div id="review_div" class="overlay" style="display: none;">
+            <div class="overlay-content">
+                <h3>Give your feedback</h3>
+                <form>
+                    <label for="rating">Rating(0-5):</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5">
+                    <br>
+                    <label for="comment">Comment:</label>
+                    <textarea id="comment" name="comment"></textarea>
+                    <br>
+                    <button id="close_request" type="button">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 

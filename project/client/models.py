@@ -1,7 +1,7 @@
 from django.db import models
 from utils import constant_converter
 from professional.models import Professional
-import json
+import json, math
 
 class Client(models.Model):
     email = models.EmailField(primary_key=True)
@@ -57,6 +57,19 @@ class Client(models.Model):
                 result['requests'].append(request_obj)
             
         return result
+    
+    def close_request(self,request,rating,comment):
+        request.status = "closed"
+        request.rating = rating
+        request.comment = comment
+
+        professional = request.professional
+        rating = math.floor((int(professional.rating) + rating)/2)
+        professional.rating = rating
+
+        request.save()
+        professional.save()
+
     
     def __str__(self):
         return self.email

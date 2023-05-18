@@ -112,8 +112,6 @@ def fetchOngoing(request):
             obj['name'] = req.get('details').split("$$")[0]
             status = req.get('status')
 
-            
-
             if(status == 'open' and ("offers" not in req)):
                 data_obj["open"].append(obj)
             elif(status == 'open'):
@@ -126,7 +124,7 @@ def fetchOngoing(request):
                 obj['phone'] = req.get('professional').get("phone")
                 obj['email'] = req.get('professional').get("email")
                 data_obj["ongoing"].append(obj)
-                
+
     return render(request,"client_ongoing_base.html",data_obj)
 
 def acceptOffer(request):
@@ -141,3 +139,47 @@ def acceptOffer(request):
     Offer.get_offer_by_id(offer).accept_offer()
 
     return HttpResponse("success")
+
+def closeRequest(request):
+    id = request.session.get('userID')
+    client = Client.get_client_by_id(id)
+    if(client is None):
+        return index(request)
+    
+    req = Request.get_request_by_id(request.POST.get('requestId'))
+    rating = abs(int(request.POST.get('rating')))
+    rating = rating % 6
+    comment = request.POST.get('comment')
+
+    client.close_request(req,rating,comment)
+
+    return HttpResponse("success")
+    
+def fetchHistory(request):
+    id = request.session.get('userID')
+    client = Client.get_client_by_id(id)
+    if(client is None):
+        return index(request)
+    
+    requests = Request.get_closed_requests_by_client(client)
+
+    data_obj = {"requests":[]}
+    if(requests):
+        for req in requests:
+            obj = {}
+            req = req.to_json()
+
+            obj['name'] = req.get('professional').get("name")
+            obj['email'] = req.get('professional').get("email")
+            obj['type'] = req.get('details').split("$$")[0]
+            obj['amount'] = req.get("amount")
+            obj['rating'] = req.get("rating")
+            obj['comment'] = req.get("comment")
+
+            data_obj.get('requests').append(obj)
+
+
+        return render(request,"history_entry.html",data_obj)
+    else:
+        return HttpResponse("empty")
+        

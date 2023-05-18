@@ -114,3 +114,31 @@ def rejectJob(request):
     offer.reject_offer()
 
     return HttpResponse("success")
+
+def fetchHistory(request):
+    id = request.session.get('userID')
+    professional = Professional.get_professiona_by_id(id)
+    if(professional is None):
+        return index(request)
+    
+    requests = Request.get_closed_requests_by_professional(professional)
+
+    data_obj = {"requests":[]}
+    if(requests):
+        for req in requests:
+            obj = {}
+            req = req.to_json()
+
+            obj['name'] = req.get('client').get("name")
+            obj['email'] = req.get('client').get("email")
+            obj['type'] = req.get('details').split("$$")[0]
+            obj['amount'] = req.get("amount")
+            obj['rating'] = req.get("rating")
+            obj['comment'] = req.get("comment")
+
+            data_obj.get('requests').append(obj)
+
+
+        return render(request,"history_entry.html",data_obj)
+    else:
+        return HttpResponse("empty")
