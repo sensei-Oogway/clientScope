@@ -1,0 +1,307 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+
+
+    <title>ClientScope | Home</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{%static 'css/client.css'%}">
+    <link rel="stylesheet" href="{%static 'css/star_rating.css'%}">
+
+    <script src="{%static 'js/client.js'%}"></script>
+
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+
+    <!-- Link to Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-section selected" id="client_toolbar_request">
+            <img src="{%static 'img/hammer.png'%}" alt="Icon 1">
+            <p>Request</p>
+        </div>
+        <div class="toolbar-section" id="client_toolbar_ongoing">
+            <img src="{%static 'img/onGoing.png'%}" alt="Icon 2">
+            <p>On going</p>
+        </div>
+        <div class="toolbar-section" id="client_toolbar_history">
+            <img src="{%static 'img/history.png'%}" alt="Icon 3">
+            <p>History</p>
+        </div>
+    </div>
+
+    <div id="home_body" class="d-flex justify-content-center">
+        <div id="client_request_menu" style="max-height: 65vh;" class="grid-container">
+            <div class="grid-item request_menu_1">
+                <img src="{%static 'img/tree.png'%}" alt="Icon 1">
+                <p>Tree removal</p>
+            </div>
+            <div class="grid-item request_menu_2">
+                <img src="{%static 'img/roof.png'%}" alt="Icon 2">
+                <p>Roof cleaning</p>
+            </div>
+            <div class="grid-item request_menu_3">
+                <img src="{%static 'img/fence.png'%}" alt="Icon 3">
+                <p>Fence installation</p>
+            </div>
+
+
+
+            <div class="grid-item request_menu_4">
+                <img src="{%static 'img/oven.png'%}" alt="Icon 4">
+                <p>Oven repairs</p>
+            </div>
+            <div class="grid-item request_menu_5">
+                <img src="{%static 'img/ac.png'%}" alt="Icon 5">
+                <p>AC repairs</p>
+            </div>
+            <div class="grid-item request_menu_6">
+                <img src="{%static 'img/tile.png'%}" alt="Icon 6">
+                <p>Tile cleaning</p>
+            </div>
+        </div>
+
+        <div id="client_request_forms_container" style=" display: none; max-height: 70vh;margin-top: 50px;">
+
+            <div id="client_request_form_1_tree" style="display: none;" class="card">
+                <div class="card-header">
+                    <h3>Tree removal services</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="{%static 'img/tree.png'%}" alt="Your Image" style="max-width: 100%; height: 150px;">
+                    </div>
+                    <form class="request_form">
+                        <div class="form-group">
+                            <label for="trees">Number of trees to be removed:</label>
+                            <input type="number" class="form-control" name="count" id="trees">
+                            <input type="hidden" value="1" name="formId">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name ="move" id="tree-moving">
+                            <label class="form-check-label" for="tree-moving">Tree moving services also required</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location details:</label>
+                            <input type="text" class="form-control" id="location" name="location">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">Submit</button>
+                            <a href="#" class="btn btn-secondary back-button form-back">Back</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div id="client_request_form_2_roof" style="display: none;" class="card">
+                <div class="card-header">
+                    <h3>Roof cleaning services</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="{%static 'img/roof.png'%}" alt="Your Image"
+                            style="max-width: 100%; height: 150px; max-height: 572px;">
+                    </div>
+                    <form class="request_form">
+                        <input type="hidden" value="2" name="formId">
+                        <div class="form-group">
+                            <label for="roof-type">Type of roofs:</label>
+                            <select class="form-control" id="roof-type">
+                                <option value="clay-roof">Clay roof</option>
+                                <option value="concrete-roof">Concrete roof</option>
+                                <option value="metal-roof">Metal roof</option>
+                                <option value="asphalt-roof">Asphalt roof</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="roof-area">Area in square metre:</label>
+                            <input type="number" class="form-control" id="roof-area">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location details:</label>
+                            <input type="text" class="form-control" id="location">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">Submit</button>
+                            <a href="#" class="btn btn-secondary form-back">Back</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div id="client_request_form_3_fence" style="display: none;" class="card">
+                <div class="card-header">
+                    <h3>Fence installation</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="{%static 'img/fence.png'%}" alt="Your Image" style="max-width: 100%; height: 150px;">
+                    </div>
+                    <form class="request_form">
+                        <input type="hidden" value="3" name="formId">
+                        <div class="form-group">
+                            <label for="fence-area">Area in square metre:</label>
+                            <input type="number" class="form-control" id="fence-area">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location details:</label>
+                            <input type="text" class="form-control" id="location">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">Submit</button>
+                            <a href="#" class="btn btn-secondary form-back">Back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="client_request_form_4_oven" style="display: none;" class="card">
+                <div class="card-header">
+                    <h3>Oven repair services</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="{%static 'img/oven.png'%}" alt="Your Image" style="max-width: 100%; height: 150px;">
+                    </div>
+                    <form class="request_form">
+                        <input type="hidden" value="4" name="formId">
+                        <div class="form-group">
+                            <label for="oven-type">Type of oven:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="oven-type" id="ordinary-oven"
+                                    value="ordinary-oven">
+                                <label class="form-check-label" for="ordinary-oven">
+                                    Ordinary
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="oven-type" id="convection-oven"
+                                    value="convection-oven">
+                                <label class="form-check-label" for="convection-oven">
+                                    Convection
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location details:</label>
+                            <input type="text" class="form-control" id="location">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">Submit</button>
+                            <a href="#" class="btn btn-secondary form-back">Back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="client_request_form_5_ac" style="display: none;" class="card">
+                <div class="card-header">
+                    <h3>AC repair services</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="{%static 'img/ac.png'%}" alt="Your Image" style="max-width: 100%; height: 150px;">
+                    </div>
+                    <form class="request_form">
+                        <input type="hidden" value="5" name="formId">
+                        <div class="form-group">
+                            <label for="units">Number of AC units:</label>
+                            <input type="number" class="form-control" id="units">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location details:</label>
+                            <input type="text" class="form-control" id="location">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">Submit</button>
+                            <a href="#" class="btn btn-secondary form-back">Back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="client_request_form_6_tile" style="display: none;" class="card">
+                <div class="card-header">
+                    <h3>Tile cleaning services</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="{%static 'img/tile.png'%}" alt="Your Image"
+                            style="max-width: 100%; height: 150px; max-height: 572px;">
+                    </div>
+                    <form class="request_form">
+                        <input type="hidden" value="6" name="formId">
+                        <div class="form-group">
+                            <label for="roof-type">Type of tiles:</label>
+                            <select class="form-control" id="roof-type">
+                                <option value="ceramic-tile">Ceramic tiles</option>
+                                <option value="natural-tile">Natural Stone Tiles</option>
+                                <option value="mosaic-tile">Mosaic Tiles</option>
+                                <option value="cement-tile">Cement Tiles</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="roof-area">Area in square metre:</label>
+                            <input type="number" class="form-control" id="roof-area">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location details:</label>
+                            <input type="text" class="form-control" id="location">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">Submit</button>
+                            <a href="#" class="btn btn-secondary form-back">Back</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div id="overlay" style="display: none;">
+                <div id="overlay-message">
+                    <h3>Price breakup</h3>
+                    <p>Subscription Type: Annual</p>
+                    <p>Start Date: <span id="strt_date">01/01/2023</span></p>
+                    <p>End Date: <span id="end_date">01/01/2023</span></p>
+                    <p>Price: $99.99</p>
+                    <div class="overlay-buttons">
+                        <button class="btn btn-primary btn-lg" id="payment-confirm">Confirm</button>
+                        <!-- <a href="#" class="btn btn-primary btn-lg">Back</a> -->
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div id = "client_ongoing_container" class="container-fluid" style="display: none;margin-top: 10px;">
+        </div>
+    </div>
+</body>
+
+</html>

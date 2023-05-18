@@ -96,6 +96,41 @@ window.addEventListener('load', function () {
     })
 
 
+    //Login ajax call
+    $('#app-login').submit(function (event) {
+        event.preventDefault();
+
+        var formData = $(this).serialize();
+        $.ajax({
+            url: '/login',
+            type: 'POST',
+            data: formData,
+            success: function (response) {
+                console.log(response)
+                if (response == "client") {
+                    var combinedForm = $('<form>').attr({
+                        method: 'POST',
+                        action: '/client/home',
+                        style: 'display: none;'
+                    });
+                    combinedForm.appendTo('body').submit();
+
+                } else if(response == "professional"){
+                    // var combinedForm = $('<form>').attr({
+                    //     method: 'POST',
+                    //     action: '/client/home',
+                    //     style: 'display: none;'
+                    // });
+                    // combinedForm.appendTo('body').submit();
+                }
+            },
+            error: function () {
+                // Handle AJAX error
+                console.log('AJAX error');
+            }
+        });
+    });
+
 
 
 

@@ -21,6 +21,10 @@ class Professional(models.Model):
             return professional
         except cls.DoesNotExist:
             return None
+        
+    @classmethod
+    def get_professionals_by_service(cls, service_number):
+        return cls.objects.filter(services__contains=f"${service_number}$")
 
     def __str__(self):
         return self.email

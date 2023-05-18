@@ -17,6 +17,14 @@ class Client(models.Model):
         return client
     
     @classmethod
+    def get_client_by_id(cls, email):
+        try:
+            client = cls.objects.get(pk=email)
+            return client
+        except cls.DoesNotExist:
+            return None
+    
+    @classmethod
     def authenticate(cls, email, password):
         try:
             client = cls.objects.get(email=email, password=password)
@@ -67,10 +75,13 @@ class Request(models.Model):
     status = models.CharField(max_length=255)
     rating = models.SmallIntegerField()
     comment = models.TextField()
+
+    serviceType = models.SmallIntegerField(default=1)
+    details = models.TextField(default='')
     
     @classmethod
-    def create_request(cls, client, location, amount):
-        request = cls(client=client, location=location, amount=amount, status='open')
+    def create_request(cls, client, location, amount, rating, details, serviceType):
+        request = cls(client=client, location=location, rating = rating,amount=amount, status='open', details=details, serviceType=serviceType)
         request.save()
         return request
 
@@ -128,6 +139,8 @@ class Request(models.Model):
             "status": self.status,
             "rating": self.rating,
             "comment": self.comment,
+            "serviceType" : self.serviceType,
+            "details" : self.details
         }
         return json.dumps(request_data)
 
