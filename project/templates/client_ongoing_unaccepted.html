@@ -1,30 +1,17 @@
-<div class="client_ongoing_card row">
+<div class="client_ongoing_card row" data-request-id="{{ request.id }}">
     <div class="col-12">
         <div class="parent-div overflow-auto">
             <div class="child-div">
-                <h5 class="title">Roof cleaning</h5>
+                <h5 class="title">{{request.name}}</h5>
                 <div class="child-div-1 client_ongoing_card_child">
+
+                    {%for offer in request.offers%}
                     <div class="row">
-                        <div class="col-6" style="padding-right: 0px;">Name of Person</div>
-                        <div class="col-3 rating rating-0" style="padding: 0px;"></div>
-                        <div class="col-3" style="padding: 0px;"><button class="btn-green btn-sm">Accept</button></div>
+                        <div class="col-6" style="padding-right: 0px;">{{offer.name}}</div>
+                        <div class="col-3 rating {{offer.rating}}" style="padding: 0px;"></div>
+                        <div class="col-3" style="padding: 0px;"><button class="btn-green btn-sm" data-offer-id="{{ offer.id }}">Accept</button></div>
                     </div>
-                    <!-- add more rows of data here -->
-                    <div class="row">
-                        <div class="col-6" style="padding-right: 0px;">Name of Person</div>
-                        <div class="col-3 rating rating-2" style="padding: 0px;"></div>
-                        <div class="col-3" style="padding: 0px;"><button class="btn-green btn-sm">Accept</button></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6" style="padding-right: 0px;">Name of Person</div>
-                        <div class="col-3 rating rating-5" style="padding: 0px;"></div>
-                        <div class="col-3" style="padding: 0px;"><button class="btn-green btn-sm">Accept</button></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6" style="padding-right: 0px;">Name of Person</div>
-                        <div class="col-3 rating rating-4" style="padding: 0px;"></div>
-                        <div class="col-3" style="padding: 0px;"><button class="btn-green btn-sm">Accept</button></div>
-                    </div>
+                    {%endfor%}
 
                 </div>
             </div>

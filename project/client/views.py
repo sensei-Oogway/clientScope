@@ -115,11 +115,14 @@ def fetchOngoing(request):
             obj['name'] = req.get('details').split("$$")[0]
             status = req.get('status')
 
-            if(status == 'open'):
+            
+
+            if(status == 'open' and ("offers" not in req)):
                 data_obj["open"].append(obj)
-            elif(status == 'accepted'):
-                obj['pro_name'] = ""
-                obj['pro_rating'] = ""
+            elif(status == 'open'):
+                obj['offers'] = []
+                for offer in req.get('offers'):
+                    obj.get("offers").append({"name":offer.get("name"),"rating":"rating-"+str(offer.get("rating")),"id":offer.get("email")})
                 data_obj["accepted"].append(obj)
             elif(status == 'ongoing'):
                 data_obj["ongoing"].append(obj)
@@ -138,5 +141,5 @@ def fetchOngoing(request):
     #Finally render the overall div
 
     #print(data_obj)
-    #return JsonResponse(req_arr)
+    #return JsonResponse(data_obj)
     return render(request,"client_ongoing_base.html",data_obj)

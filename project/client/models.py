@@ -47,7 +47,7 @@ class Client(models.Model):
                 if offers:
                     request_obj['offers'] = []
                     for offer in offers:
-                        request_obj.offers.append(offer.professional.to_json())
+                        request_obj.get("offers").append(offer.professional.to_json())
                 result['requests'].append(request_obj)
             
         return result
@@ -192,8 +192,8 @@ class Offer(models.Model):
     def reject_offer(self):
         self.delete()
 
-    def accept_offer(self):
-        professional = self.professional
+    def accept_offer(self,professional):
+        #professional = self.professional
         request = self.request
 
         request.professional = professional

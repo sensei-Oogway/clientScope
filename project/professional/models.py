@@ -9,6 +9,8 @@ class Professional(models.Model):
     account = models.TextField()
     services = models.TextField()
 
+    rating = models.SmallIntegerField(default=3)
+
     @classmethod
     def create(cls, email, name, password, phone, account, services):
         professional = cls(email=email, name=name, password=password, phone=phone, account=account, services=services)
@@ -46,5 +48,6 @@ class Professional(models.Model):
             "phone": self.phone,
             "account": self.account,
             "services": self.services,
+            "rating": self.rating
         }
         return professional_data
