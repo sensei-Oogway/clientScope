@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 from client.models import Client, Request, Offer
 from professional.models import Professional
+from django.http import JsonResponse
 
 def index(request):
     return render(request,"index.html")
@@ -25,7 +26,7 @@ def commonLogin(request):
             request.session['userType'] = 'professional'
             request.session['userID'] = email
 
-            return HttpResponse("login successful")
+            return HttpResponse("professional")
     
     return HttpResponse("login Failure")
 
@@ -50,7 +51,8 @@ def registerUser(request):
             return render(request,"index.html")
 
     elif(userType == 'professional'):
-        services = request.POST.get('services')
+        services = request.POST.getlist('services')
+        print(services)
         service_ = ""
         for service in services:
             service_ += service + "$"
@@ -72,7 +74,7 @@ def home(request):
 
 def submitRequest(request):
     id = request.session.get('userID')
-    print(id)
+    #print(id)
     client = Client.get_client_by_id(id)
     if(client is None):
         return index(request)
@@ -85,18 +87,47 @@ def submitRequest(request):
 
         rating = 0
 
-        # req = Request.create_request(client,location,amount,rating,details,serviceType)
-        # if(req):
-        #     pros = Professional.get_professionals_by_service(serviceType)
-        #     Offer.publish_offers(request,pros)
-        #     return HttpResponse("success")
+        req = Request.create_request(client,location,amount,rating,details,serviceType)
+        if(req):
+            pros = Professional.get_professionals_by_service(serviceType)
+            offrs = Offer.publish_offers(req,pros)
+            return HttpResponse("success")
 
-        return HttpResponse("success")
+        return HttpResponse("error")
 
 def fetchOngoing(request):
+    id = request.session.get('userID')
+    client = Client.get_client_by_id(id)
+    if(client is None):
+        return index(request)
+    
+
+    
+
     #Fetch all the open requests
+    req_arr = Client.get_open_requests_with_accepted_offers(client).get("requests")
+
+    if len(req_arr) != 0:
+        data_obj = {"open":[], "accepted":[],"ongoing":[]}
+        for req in req_arr:
+            obj = {}
+            obj['id'] = req.get('id')
+            obj['name'] = req.get('details').split("$$")[0]
+            status = req.get('status')
+
+            if(status == 'open'):
+                data_obj["open"].append(obj)
+            elif(status == 'accepted'):
+                obj['pro_name'] = ""
+                obj['pro_rating'] = ""
+                data_obj["accepted"].append(obj)
+            elif(status == 'ongoing'):
+                data_obj["ongoing"].append(obj)
+
+
         #Fetch all unaccepted requests
         #Fetch all offers
+
     #Fetch all ongoing requests
 
     #Create a separate template and append these modules to the overall div
@@ -106,4 +137,6 @@ def fetchOngoing(request):
 
     #Finally render the overall div
 
-    return HttpResponse("suc")
+    #print(data_obj)
+    #return JsonResponse(req_arr)
+    return render(request,"client_ongoing_base.html",data_obj)

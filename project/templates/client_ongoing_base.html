@@ -1,0 +1,17 @@
+<div>
+    <!-- Open -->
+    {% for req in  open %}
+        {% include 'client_ongoing_open.html' with request=req%}
+    {% endfor %}
+
+    <!-- Accepted -->
+    {% for req in  accepted %}
+        {% include 'client_ongoing_unaccepted.html' with request=req%}
+    {% endfor %}
+
+    <!-- Ongoing -->
+    {% for req in  ongoing %}
+        {% include 'client_ongoing_ongoing.html' with request=req%}
+    {% endfor %}
+
+</div>

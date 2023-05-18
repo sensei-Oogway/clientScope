@@ -1,6 +1,7 @@
 from django.db import models
 from utils import constant_converter
 from professional.models import Professional
+import json
 
 class Client(models.Model):
     email = models.EmailField(primary_key=True)
@@ -32,11 +33,12 @@ class Client(models.Model):
         except cls.DoesNotExist:
             return None
     
-    @classmethod
+    # @classmethod
     def get_open_requests_with_accepted_offers(client):
         result = {}
 
         open_requests = Request.get_open_requests_by_client(client)
+        print(open_requests)
         if open_requests :
             result['requests'] = []
             for request in open_requests:
@@ -46,7 +48,7 @@ class Client(models.Model):
                     request_obj['offers'] = []
                     for offer in offers:
                         request_obj.offers.append(offer.professional.to_json())
-                result.requests.append(request_obj)
+                result['requests'].append(request_obj)
             
         return result
     
@@ -55,7 +57,6 @@ class Client(models.Model):
     
     def to_json(self):
         client_data = {
-            "id": self.id,
             "name": self.name,
             "membership": self.membership,
             "email": self.email,
@@ -64,7 +65,7 @@ class Client(models.Model):
             "account": self.account,
         }
 
-        return json.dumps(client_data)
+        return client_data
     
 class Request(models.Model):
     id = models.AutoField(primary_key=True)
@@ -142,7 +143,7 @@ class Request(models.Model):
             "serviceType" : self.serviceType,
             "details" : self.details
         }
-        return json.dumps(request_data)
+        return request_data
 
     
 class Offer(models.Model):

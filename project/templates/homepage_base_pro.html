@@ -1,0 +1,61 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+
+
+    <title>ClientScope | Home</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{%static 'css/professional.css'%}">
+    <link rel="stylesheet" href="{%static 'css/star_rating.css'%}">
+
+    <script src="{%static 'js/professional.js'%}"></script>
+    <!-- <script src="{%static 'js/client_ongoing.js'%}"></script> -->
+
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+
+    <!-- Link to Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-section selected" id="client_toolbar_request">
+            <img src="{%static 'img/hammer.png'%}" alt="Icon 1">
+            <p>Request</p>
+        </div>
+        <div class="toolbar-section" id="client_toolbar_ongoing">
+            <img src="{%static 'img/onGoing.png'%}" alt="Icon 2">
+            <p>On going</p>
+        </div>
+        <div class="toolbar-section" id="client_toolbar_history">
+            <img src="{%static 'img/history.png'%}" alt="Icon 3">
+            <p>History</p>
+        </div>
+    </div>
+
+    <div id="home_body" class="d-flex justify-content-center"></div>
+
+    <a href="http://127.0.0.1:8000/" class="logout-button">
+        <img src="{% static 'img/logout.png' %}" alt="Logout Icon">
+    </a>
+
+</body>
+
+</html>

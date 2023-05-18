@@ -2,7 +2,7 @@ window.addEventListener('load', function () {
 
     //Toaster
     toastr.options = {
-        timeOut: 500
+        timeOut: 750
     };
 
     // Tool bar section
@@ -12,11 +12,6 @@ window.addEventListener('load', function () {
 
     });
 
-    $("#client_toolbar_ongoing").click(function (event) {
-        toggleSelected($("#client_toolbar_ongoing"))
-        
-
-    });
 
     $("#client_toolbar_history").click(function (event) {
         toggleSelected($("#client_toolbar_history"))
@@ -34,6 +29,7 @@ window.addEventListener('load', function () {
     $(".form-back").each(function(){
         $(this).on("click", function() {
             closeRequestForm()
+            $("#client_request_menu").show()
         })
     })
 
@@ -73,7 +69,6 @@ var closeRequestForm = function(){
     $(".openRequestForm").hide()
     $(".openRequestForm").removeClass("openRequestForm")
     $("#client_request_forms_container").hide()
-    $("#client_request_menu").show()
 }
 
 var submitRequestForm = function(){
@@ -103,7 +98,7 @@ var submitRequestForm = function(){
     }
 
     formData_clean = cleanFormData(formObject)
-    console.log(formData_clean)
+    //console.log(formData_clean)
 
     var success = function(response){
         if(response == "success"){
@@ -113,6 +108,7 @@ var submitRequestForm = function(){
 
     response = sendAjaxRequest("home/submitForm","POST",formData_clean,success)
     closeRequestForm()
+    $("#client_request_menu").show()
 }
 
 var cleanFormData =  function (formData){
@@ -133,6 +129,8 @@ var cleanFormData =  function (formData){
 
     return data
 }
+
+
 
 var sendAjaxRequest = function(url,method,data,success){
     $.ajax({

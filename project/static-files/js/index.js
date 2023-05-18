@@ -116,12 +116,12 @@ window.addEventListener('load', function () {
                     combinedForm.appendTo('body').submit();
 
                 } else if(response == "professional"){
-                    // var combinedForm = $('<form>').attr({
-                    //     method: 'POST',
-                    //     action: '/client/home',
-                    //     style: 'display: none;'
-                    // });
-                    // combinedForm.appendTo('body').submit();
+                    var combinedForm = $('<form>').attr({
+                        method: 'POST',
+                        action: '/professional/home',
+                        style: 'display: none;'
+                    });
+                    combinedForm.appendTo('body').submit();
                 }
             },
             error: function () {
