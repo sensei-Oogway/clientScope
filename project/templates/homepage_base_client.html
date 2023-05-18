@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{%static 'css/star_rating.css'%}">
 
     <script src="{%static 'js/client.js'%}"></script>
+    <script src="{%static 'js/client_ongoing.js'%}"></script>
 
     <!-- Link to Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
@@ -302,6 +303,12 @@
         <div id = "client_ongoing_container" class="container-fluid" style="display: none;margin-top: 10px;">
         </div>
     </div>
+
+    <a href="http://127.0.0.1:8000/" class="logout-button">
+        <img src="{% static 'img/logout.png' %}" alt="Logout Icon">
+    </a>
+
+
 </body>
 
 </html>
