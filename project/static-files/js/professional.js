@@ -17,7 +17,7 @@ window.addEventListener('load', function () {
 
     $("#client_toolbar_ongoing").click(function (event) {
         toggleSelected($("#client_toolbar_ongoing"))
-        //sendAjaxRequest("ongoing","GET",{},load_ongoing_page)
+        sendAjaxRequest("ongoing","GET",{},load_ongoing_page)
 
     });
 
@@ -31,6 +31,14 @@ window.addEventListener('load', function () {
         if (!overlay.contains(event.relatedTarget)) {
             overlay.style.display = "none"; 
             $('#job-details').removeAttr('req-id')
+        }
+    });
+
+    var overlay = document.getElementById("ongoing-details");
+
+    document.addEventListener("focusout", function (event) {
+        if (!overlay.contains(event.relatedTarget)) {
+            overlay.style.display = "none"; 
         }
     });
 
@@ -76,7 +84,6 @@ var load_home_page = function(response){
     
         addEventListeners_homePage()
     }
-
 }
 
 var addEventListeners_homePage = function(){
@@ -128,4 +135,41 @@ var addEventListeners_homePage = function(){
 
 
     
+}
+
+var load_ongoing_page = function(response){
+    if(response == "empty"){
+        $("#nothing_here").show()
+    }else{
+        if($("#nothing_here").is(':visible')){
+            $("#nothing_here").hide()
+        }
+        $("#professional_requests_container").html(response)
+        $("#professional_requests_container").show()
+    
+        addEventListeners_homePage()
+    }
+    //console.log(response)
+}
+
+var addEventListeners_ongoing = function(){
+    $(".ongoing-details").click(function (event) {
+        var triggerElement = event.target;
+        data = jQuery(triggerElement).data('content')
+        // var requestId = $(triggerElement).closest('[data-request-id]').data('request-id');
+
+
+        var entries = data.split("$$");
+        var detailsList = $('.ongoing-list');
+        detailsList.html("")
+
+        $.each(entries, function(index, entry) {
+            var listItem = $('<li>').text(entry);
+            detailsList.append(listItem);
+        });
+
+        // $('#job-details').attr('req-id', requestId);
+        // $('.job-details-reject').prop('disabled', false);
+        $('#ongoing-details').show()
+    });
 }

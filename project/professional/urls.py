@@ -5,5 +5,6 @@ urlpatterns = [
                path("home",views.home),
                path("jobs",views.fetchJobs),
                path("accept",views.acceptJob),
-               path("reject",views.rejectJob)
+               path("reject",views.rejectJob),
+               path("ongoing",views.fetchOngoingJobs)
                 ]
