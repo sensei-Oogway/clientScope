@@ -2,7 +2,7 @@ window.addEventListener('load', function () {
 
     //Toaster
     toastr.options = {
-        timeOut: 500
+        timeOut: 750
     };
 
     // Tool bar section
@@ -98,7 +98,7 @@ var submitRequestForm = function(){
     }
 
     formData_clean = cleanFormData(formObject)
-    console.log(formData_clean)
+    //console.log(formData_clean)
 
     var success = function(response){
         if(response == "success"){

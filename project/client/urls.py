@@ -6,4 +6,5 @@ urlpatterns = [path("",views.index),
                  path("login",views.commonLogin),
                    path("register",views.registerUser),
                      path("home/submitForm", views.submitRequest),
-                     path("ongoing", views.fetchOngoing)]
+                     path("ongoing", views.fetchOngoing),
+                     path("acceptoffer",views.acceptOffer)]

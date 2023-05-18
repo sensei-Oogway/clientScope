@@ -38,16 +38,22 @@ class Client(models.Model):
         result = {}
 
         open_requests = Request.get_open_requests_by_client(client)
-        print(open_requests)
-        if open_requests :
+        ong_requests = Request.get_ongoing_requests_by_client(client)
+
+        merged_req = open_requests.union(ong_requests)
+
+        #print(open_requests)
+        if merged_req :
             result['requests'] = []
-            for request in open_requests:
+            for request in merged_req:
                 request_obj = request.to_json()
                 offers = request.get_offers_accepted()
                 if offers:
                     request_obj['offers'] = []
                     for offer in offers:
-                        request_obj.get("offers").append(offer.professional.to_json())
+                        pro_jso = offer.professional.to_json()
+                        pro_jso['id'] = offer.to_json().get('id')
+                        request_obj.get("offers").append(pro_jso)
                 result['requests'].append(request_obj)
             
         return result
@@ -85,6 +91,14 @@ class Request(models.Model):
         request = cls(client=client, location=location, rating = rating,amount=amount, status='open', details=details, serviceType=serviceType)
         request.save()
         return request
+    
+    @classmethod
+    def get_request_by_id(cls, id):
+        try:
+            request = cls.objects.get(pk=id)
+            return request
+        except cls.DoesNotExist:
+            return None
 
     @classmethod
     def get_requests_by_client(cls, client):
@@ -192,14 +206,18 @@ class Offer(models.Model):
     def reject_offer(self):
         self.delete()
 
-    def accept_offer(self,professional):
-        #professional = self.professional
+    def accept_offer(self):
+        professional = self.professional
         request = self.request
 
         request.professional = professional
         request.status = "ongoing"
 
+        request.save()
+
         Offer.delete_offers_by_request(request)
+
+    
     
 
     

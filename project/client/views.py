@@ -101,9 +101,6 @@ def fetchOngoing(request):
     if(client is None):
         return index(request)
     
-
-    
-
     #Fetch all the open requests
     req_arr = Client.get_open_requests_with_accepted_offers(client).get("requests")
 
@@ -122,24 +119,25 @@ def fetchOngoing(request):
             elif(status == 'open'):
                 obj['offers'] = []
                 for offer in req.get('offers'):
-                    obj.get("offers").append({"name":offer.get("name"),"rating":"rating-"+str(offer.get("rating")),"id":offer.get("email")})
+                    obj.get("offers").append({"name":offer.get("name"),"rating":"rating-"+str(offer.get("rating")),"id":offer.get("id")})
                 data_obj["accepted"].append(obj)
             elif(status == 'ongoing'):
+                obj['pro_name'] = req.get('professional').get("name")
+                obj['phone'] = req.get('professional').get("phone")
+                obj['email'] = req.get('professional').get("email")
                 data_obj["ongoing"].append(obj)
-
-
-        #Fetch all unaccepted requests
-        #Fetch all offers
-
-    #Fetch all ongoing requests
-
-    #Create a separate template and append these modules to the overall div
-        #1. unaccepted
-        #2. offers
-        #3. ongoing
-
-    #Finally render the overall div
-
-    #print(data_obj)
-    #return JsonResponse(data_obj)
+                
     return render(request,"client_ongoing_base.html",data_obj)
+
+def acceptOffer(request):
+    id = request.session.get('userID')
+    client = Client.get_client_by_id(id)
+    if(client is None):
+        return index(request)
+    
+    
+    offer = request.POST.get("offerId")
+
+    Offer.get_offer_by_id(offer).accept_offer()
+
+    return HttpResponse("success")
