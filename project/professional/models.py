@@ -14,6 +14,14 @@ class Professional(models.Model):
         professional = cls(email=email, name=name, password=password, phone=phone, account=account, services=services)
         professional.save()
         return professional
+    
+    @classmethod
+    def get_professiona_by_id(cls, email):
+        try:
+            prof = cls.objects.get(pk=email)
+            return prof
+        except cls.DoesNotExist:
+            return None
 
     @classmethod
     def authenticate(cls, email, password):

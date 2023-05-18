@@ -50,7 +50,39 @@
         </div>
     </div>
 
-    <div id="home_body" class="d-flex justify-content-center"></div>
+    <div id="home_body" class="d-flex justify-content-center">
+
+        <div id="professional_requests_container" style="display: none;" class="container-fluid">
+        </div>
+
+        <!-- Overlay div to view further details -->
+        <div id="job-details" class="overlay" style="display: none;">
+            <div class="overlay-content">
+                <h3>Tree removal</h3>
+                <div class="scrollable-div">
+                    <ol class="details-list" style="padding-left: 20px;">
+                        <li>Client Name : Nameless user</li>
+                        <li>Location : 123, XYZ street, NSW.</li>
+                        <li>Number of Trees : 5</li>
+                        <li>Should it be moved? : Yes</li>
+                        <li>Estimated fee : $60</li>
+                    </ol>
+
+                </div>
+                <div class="button-container">
+                    <button class="btn btn-success job-details-accept">Accept</button>
+                    <button class="btn btn-danger job-details-reject">Reject</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty page  -->
+        <div id="nothing_here" style="display: none;" class="centered-image">
+            <img src="{%static 'img/nothing_page.png'%}" alt="your-image-alt">
+        </div>
+
+
+    </div>
 
     <a href="http://127.0.0.1:8000/" class="logout-button">
         <img src="{% static 'img/logout.png' %}" alt="Logout Icon">

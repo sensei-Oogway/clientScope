@@ -167,19 +167,15 @@ class Offer(models.Model):
             offer.save()
             offers.append(offer)
         return offers
-    
+
     @classmethod
-    def get_open_accepted_offers(cls, professional):
+    def get_open_offer_ids_with_requests(cls,professional):
         open_offers = cls.objects.filter(professional=professional, status='open')
-        accepted_offers = cls.objects.filter(professional=professional, status='accepted')
+        open_offer_ids = open_offers.values_list("id", flat=True)
+        open_requests = Request.objects.filter(id__in=open_offers.values_list("request", flat=True))
+        open_offers_with_requests = {offer.id: offer.request for offer in open_offers}
 
-        open_request_ids = open_offers.values_list("request", flat=True)
-        accepted_request_ids = accepted_offers.values_list("request", flat=True)
-
-        open_requests = Request.objects.filter(id__in=open_request_ids)
-        accepted_requests = Request.objects.filter(id__in=accepted_request_ids)
-
-        return {"open": open_requests, "accepted": accepted_requests}
+        return open_offer_ids, open_requests, open_offers_with_requests
     
     @classmethod
     def delete_offers_by_request(cls, req):
@@ -196,10 +192,9 @@ class Offer(models.Model):
     def reject_offer(self):
         self.delete()
 
-    @classmethod
-    def accept_offer(cls, offer):
-        professional = offer.professional
-        request = offer.request
+    def accept_offer(self):
+        professional = self.professional
+        request = self.request
 
         request.professional = professional
         request.status = "ongoing"
@@ -218,4 +213,4 @@ class Offer(models.Model):
             "professional": self.professional.to_json(),
             "status": self.status,
         }
-        return json.dumps(offer_data)
+        return offer_data

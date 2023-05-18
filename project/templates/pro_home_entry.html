@@ -1,0 +1,22 @@
+{% for req in  contents %}
+<div class="professional_requests_card row" data-request-id="{{ req.id }}">
+    <div class="childdiv col-12">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="title">{{req.name}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7">
+                <p>
+                    {{req.location}}
+                </p>
+            </div>
+            <div class="col-5 d-flex justify-content-end">
+                <button class="btn btn-primary btn-sm job-details" style="max-height: 35px;" data-content="{{ req.extra }}">View details</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
