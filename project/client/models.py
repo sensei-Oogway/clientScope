@@ -1,5 +1,4 @@
 from django.db import models
-from utils import constant_converter
 from professional.models import Professional
 import json, math
 

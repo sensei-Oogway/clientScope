@@ -23,22 +23,23 @@ window.addEventListener('load', function () {
 
     $("#client_toolbar_history").click(function (event) {
         toggleSelected($("#client_toolbar_history"))
+        load_history()
     });
 
-    var overlay = document.getElementById("job-details");
+    var overlay1 = document.getElementById("job-details");
 
     document.addEventListener("focusout", function (event) {
-        if (!overlay.contains(event.relatedTarget)) {
-            overlay.style.display = "none"; 
+        if (!overlay1.contains(event.relatedTarget)) {
+            overlay1.style.display = "none"; 
             $('#job-details').removeAttr('req-id')
         }
     });
 
-    var overlay = document.getElementById("ongoing-details");
+    var overlay2 = document.getElementById("ongoing-details");
 
     document.addEventListener("focusout", function (event) {
-        if (!overlay.contains(event.relatedTarget)) {
-            overlay.style.display = "none"; 
+        if (!overlay2.contains(event.relatedTarget)) {
+            overlay2.style.display = "none"; 
         }
     });
 
@@ -147,7 +148,7 @@ var load_ongoing_page = function(response){
         $("#professional_requests_container").html(response)
         $("#professional_requests_container").show()
     
-        addEventListeners_homePage()
+        addEventListeners_ongoing()
     }
     //console.log(response)
 }
@@ -172,4 +173,18 @@ var addEventListeners_ongoing = function(){
         // $('.job-details-reject').prop('disabled', false);
         $('#ongoing-details').show()
     });
+}
+
+var load_history = function(){
+    sendAjaxRequest("history", "GET", {}, (response) => {
+        if (response == "empty") {
+            $("#nothing_here").show()
+        } else {
+            if ($("#nothing_here").is(':visible')) {
+                $("#nothing_here").hide()
+            }
+            $("#professional_requests_container").html(response)
+            $("#professional_requests_container").show()
+        }
+    })
 }

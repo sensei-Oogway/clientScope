@@ -5,6 +5,11 @@ window.addEventListener('load', function () {
         timeOut: 750
     };
 
+    //tool tip
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+
     // Tool bar section
     $("#client_toolbar_request").click(function (event) {
         toggleSelected($("#client_toolbar_request"))
@@ -12,10 +17,6 @@ window.addEventListener('load', function () {
 
     });
 
-
-    $("#client_toolbar_history").click(function (event) {
-        toggleSelected($("#client_toolbar_history"))
-    });
 
     // Request menu section
     $("#client_request_menu .grid-item").each(function(){
