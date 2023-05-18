@@ -97,6 +97,7 @@ var addEventListeners_homePage = function(){
         });
 
         $('#job-details').attr('req-id', requestId);
+        $('.job-details-reject').prop('disabled', false);
         $('#job-details').show()
     });
 
@@ -112,6 +113,7 @@ var addEventListeners_homePage = function(){
     })
 
     $(".job-details-reject").click(function(){
+        //$('.job-details-reject').prop('disabled', true);
         requestId = $('#job-details').attr('req-id')
         sendAjaxRequest("reject","POST",{"offer_id":requestId},(response)=>{
             if(response == "success"){

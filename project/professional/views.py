@@ -67,7 +67,7 @@ def acceptJob(request):
         return index(request)
     
     offer_id = request.POST.get("offer_id")
-    Offer.get_offer_by_id(offer_id).accept_offer()
+    Offer.get_offer_by_id(offer_id).bid()
 
     return HttpResponse("success")
 
@@ -78,6 +78,7 @@ def rejectJob(request):
         return index(request)
     
     offer_id = request.POST.get("offer_id")
-    Offer.get_offer_by_id(offer_id).reject_offer()
+    offer = Offer.get_offer_by_id(offer_id)
+    offer.reject_offer()
 
     return HttpResponse("success")
