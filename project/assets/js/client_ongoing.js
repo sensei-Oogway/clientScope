@@ -37,6 +37,18 @@ var load_ongoing_page = function (response) {
 }
 
 var load_ongoing_listeners = function () {
+
+    $('button[data-offer-id]').click(function(event) {
+        var offerId = $(this).data('offer-id');
+
+        sendAjaxRequest("acceptoffer","POST",{"offerId":offerId},(response)=>{
+            if(response == "success"){
+                $("#client_toolbar_ongoing").trigger("click")
+            }
+        })
+        
+      });
+
     $('button[data-request-id]').click(function (event) {
         var requestId = $(event.target).attr('data-request-id');
 
