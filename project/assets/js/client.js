@@ -127,6 +127,58 @@ var cleanFormData =  function (formData){
         details = "Tree removal$$Count="+formData.count+"$$Moving="+formData.hasOwnProperty("move")
         data['details'] = details
     }
+    else if(id == 2){
+        data['serviceType'] = 2
+        data['location'] = formData.location
+        //Calculate amount
+        data['amount'] = 100
+
+        //Build details
+        details = "Roof cleaning$$Roof type="+formData.roof_type+"$$Area="+formData.roof_area
+        data['details'] = details
+
+    }
+    else if(id == 3){
+        data['serviceType'] = 3
+        data['location'] = formData.location
+        //Calculate amount
+        data['amount'] = 200
+
+        //Build details
+        details = "Fence installation$$Area="+formData.fence_area
+        data['details'] = details
+
+    }
+    else if(id == 4){
+        data['serviceType'] = 4
+        data['location'] = formData.location
+        //Calculate amount
+        data['amount'] = 20
+
+        //Build details
+        details = "Oven Cleaning$$Oven type="+formData.oven_type
+        data['details'] = details
+    }
+    else if(id == 5){
+        data['serviceType'] = 5
+        data['location'] = formData.location
+        //Calculate amount
+        data['amount'] = 30
+
+        //Build details
+        details = "AC repair$$Units count="+formData.count
+        data['details'] = details
+    }
+    else if(id == 6){
+        data['serviceType'] = 6
+        data['location'] = formData.location
+        //Calculate amount
+        data['amount'] = 100
+
+        //Build details
+        details = "Tile cleaning$$Tile type="+formData.tile_type+"$$Area="+formData.tile_area
+        data['details'] = details
+    }
 
     return data
 }

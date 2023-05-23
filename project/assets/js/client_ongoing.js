@@ -71,7 +71,7 @@ var load_ongoing_listeners = function () {
             if (response == "success") {
                 $("#review_div").hide()
                 $("#client_toolbar_ongoing").trigger("click")
-                toastr.submit('Job completed successfully!');
+                toastr.success('Job completed successfully!');
             }
         })
     })

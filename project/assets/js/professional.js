@@ -92,6 +92,7 @@ var addEventListeners_homePage = function(){
     $(".job-details").click(function (event) {
         var triggerElement = event.target;
         data = jQuery(triggerElement).data('content')
+        service_name = jQuery(triggerElement).data('nmcontent')
         var requestId = $(triggerElement).closest('[data-request-id]').data('request-id');
 
 
@@ -103,6 +104,8 @@ var addEventListeners_homePage = function(){
             var listItem = $('<li>').text(entry);
             detailsList.append(listItem);
         });
+
+        $("#details-title").html(service_name)
 
         $('#job-details').attr('req-id', requestId);
         $('.job-details-reject').prop('disabled', false);
@@ -157,8 +160,7 @@ var addEventListeners_ongoing = function(){
     $(".ongoing-details").click(function (event) {
         var triggerElement = event.target;
         data = jQuery(triggerElement).data('content')
-        // var requestId = $(triggerElement).closest('[data-request-id]').data('request-id');
-
+        service_name = jQuery(triggerElement).data('nmcontent')
 
         var entries = data.split("$$");
         var detailsList = $('.ongoing-list');
@@ -169,8 +171,7 @@ var addEventListeners_ongoing = function(){
             detailsList.append(listItem);
         });
 
-        // $('#job-details').attr('req-id', requestId);
-        // $('.job-details-reject').prop('disabled', false);
+        $("#details-title").html(service_name)
         $('#ongoing-details').show()
     });
 }

@@ -127,6 +127,17 @@ var cleanFormData =  function (formData){
         details = "Tree removal$$Count="+formData.count+"$$Moving="+formData.hasOwnProperty("move")
         data['details'] = details
     }
+    else if(id == 2){
+        data['serviceType'] = 1
+        data['location'] = formData.location
+        //Calculate amount
+        data['amount'] = 100
+
+        //Build details
+        details = "Roof cleaning$$Roof type="+formData.roof_type+"$$Area="+formData.roof_area
+        data['details'] = details
+
+    }
 
     return data
 }
